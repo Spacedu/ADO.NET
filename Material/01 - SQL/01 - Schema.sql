@@ -57,7 +57,7 @@ CREATE TABLE [dbo].[UsuariosDepartamentos] (
 	CONSTRAINT [FK_UsuariosDepartamentos_Usuarios] FOREIGN KEY ([UsuarioId]) REFERENCES [dbo].[Usuarios] ([Id]) ON DELETE CASCADE,
 	CONSTRAINT [FK_UsuariosDepartamentos_Departamentos] FOREIGN KEY ([DepartamentoId]) REFERENCES [dbo].[Departamentos] ([Id]) ON DELETE CASCADE
 );
-
+go
 
 
 -- Store Procedures na tabela de Usuarios
