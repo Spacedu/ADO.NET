@@ -37,7 +37,7 @@ namespace eCommerce.API.Repositories
                 _connection.Open();
 
                 SqlDataReader dataReader = command.ExecuteReader();
-
+                //Dapper, EF, NHibernate (ORM - Object-POO Relational-MER Mapper)
                 while (dataReader.Read())
                 {
                     Usuario usuario = new Usuario();
