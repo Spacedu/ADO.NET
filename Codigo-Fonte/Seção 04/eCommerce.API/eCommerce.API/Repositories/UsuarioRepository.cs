@@ -74,7 +74,7 @@ namespace eCommerce.API.Repositories
             {
                 
                 SqlCommand command = new SqlCommand();
-                command.CommandText = $"SELECT * FROM Usuarios u LEFT JOIN Contatos c ON c.UsuarioId = u.Id LEFT JOIN EnderecosEntrega ee ON ee.UsuarioId = u.Id WHERE u.Id =  @Id";
+                command.CommandText = $"SELECT * FROM Usuarios u LEFT JOIN Contatos c ON c.UsuarioId = u.Id LEFT JOIN EnderecosEntrega ee ON ee.UsuarioId = u.Id LEFT JOIN UsuariosDepartamentos ud ON ud.UsuarioId = u.Id LEFT JOIN Departamentos d ON ud.DepartamentoId = d.Id WHERE u.Id = @Id";
                 command.Parameters.AddWithValue("@Id", id);
                 command.Connection = (SqlConnection)_connection;
 
@@ -126,10 +126,29 @@ namespace eCommerce.API.Repositories
                     enderecoEntrega.Complemento = dataReader.GetString("Complemento");
 
                     usuario.EnderecosEntrega = (usuario.EnderecosEntrega == null) ? new List<EnderecoEntrega>() : usuario.EnderecosEntrega;
-                    usuario.EnderecosEntrega.Add(enderecoEntrega);
+
+                    if( usuario.EnderecosEntrega.FirstOrDefault(a => a.Id == enderecoEntrega.Id) == null)
+                    {
+                        usuario.EnderecosEntrega.Add(enderecoEntrega);
+                    }
+
+                    Departamento departamento = new Departamento();
+                    departamento.Id = dataReader.GetInt32(26);
+                    departamento.Nome = dataReader.GetString(27);
+
+                    usuario.Departamentos = (usuario.Departamentos == null) ? new List<Departamento>() : usuario.Departamentos;
+
+                    if( usuario.Departamentos.FirstOrDefault(a=>a.Id == departamento.Id) == null)
+                    {
+                        usuario.Departamentos.Add(departamento);
+                    }                    
                 }
                 
                 return usuarios[usuarios.Keys.First()];
+            }
+            catch(Exception e)
+            {
+                return null;
             }
             finally
             {
