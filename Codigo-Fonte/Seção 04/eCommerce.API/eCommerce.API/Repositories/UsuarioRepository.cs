@@ -74,7 +74,7 @@ namespace eCommerce.API.Repositories
             {
                 
                 SqlCommand command = new SqlCommand();
-                command.CommandText = $"SELECT * FROM Usuarios WHERE Id = @Id";
+                command.CommandText = $"SELECT * FROM Usuarios u LEFT JOIN Contatos c ON c.UsuarioId = u.Id WHERE u.Id = @Id";
                 command.Parameters.AddWithValue("@Id", id);
                 command.Connection = (SqlConnection)_connection;
 
@@ -84,7 +84,7 @@ namespace eCommerce.API.Repositories
                 while (dataReader.Read())
                 {
                     Usuario usuario = new Usuario();
-                    usuario.Id = dataReader.GetInt32("Id");
+                    usuario.Id = dataReader.GetInt32(0);
                     usuario.Nome = dataReader.GetString("Nome");
                     usuario.Email = dataReader.GetString("Email");
                     usuario.Sexo = dataReader.GetString("Sexo");
@@ -93,6 +93,14 @@ namespace eCommerce.API.Repositories
                     usuario.NomeMae = dataReader.GetString("NomeMae");
                     usuario.SituacaoCadastro = dataReader.GetString("SituacaoCadastro");
                     usuario.DataCadastro = dataReader.GetDateTimeOffset(8);
+
+                    Contato contato = new Contato();
+                    contato.Id = dataReader.GetInt32(9);
+                    contato.UsuarioId = usuario.Id;
+                    contato.Telefone = dataReader.GetString("Telefone");
+                    contato.Celular = dataReader.GetString("Celular");
+
+                    usuario.Contato = contato;
 
                     return usuario;
                 }
