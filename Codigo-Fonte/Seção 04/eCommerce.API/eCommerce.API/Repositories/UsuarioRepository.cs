@@ -62,9 +62,47 @@ namespace eCommerce.API.Repositories
             return usuarios;
         }
 
+        /*
+         * Exemplo de Valores para SQL Injection:
+         * José
+         * José' OR Nome LIKE '%'; DELETE FROM Usuarios
+         * SQL Injection: SELECT * FROM Usuarios WHERE Nome = 'José' OR Nome LIKE '%'; DELETE FROM Usuarios;'
+         */
         public Usuario Get(int id)
         {
-            return _db.FirstOrDefault(a => a.Id == id);
+            try
+            {
+                
+                SqlCommand command = new SqlCommand();
+                command.CommandText = $"SELECT * FROM Usuarios WHERE Id = @Id";
+                command.Parameters.AddWithValue("@Id", id);
+                command.Connection = (SqlConnection)_connection;
+
+                _connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = dataReader.GetInt32("Id");
+                    usuario.Nome = dataReader.GetString("Nome");
+                    usuario.Email = dataReader.GetString("Email");
+                    usuario.Sexo = dataReader.GetString("Sexo");
+                    usuario.RG = dataReader.GetString("RG");
+                    usuario.CPF = dataReader.GetString("CPF");
+                    usuario.NomeMae = dataReader.GetString("NomeMae");
+                    usuario.SituacaoCadastro = dataReader.GetString("SituacaoCadastro");
+                    usuario.DataCadastro = dataReader.GetDateTimeOffset(8);
+
+                    return usuario;
+                }
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return null;
         }
 
         public void Insert(Usuario usuario)
