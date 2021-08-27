@@ -160,11 +160,16 @@ namespace eCommerce.API.Repositories
 
         public void Insert(Usuario usuario)
         {
+            _connection.Open();
+            SqlTransaction transaction = (SqlTransaction)_connection.BeginTransaction();
             try
             {
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "INSERT INTO Usuarios(Nome, Email, Sexo, RG, CPF, NomeMae, SituacaoCadastro, DataCadastro) VALUES (@Nome, @Email, @Sexo, @RG, @CPF, @NomeMae, @SituacaoCadastro, @DataCadastro);SELECT CAST(scope_identity() AS int)";
+                command.Transaction = transaction;
                 command.Connection = (SqlConnection)_connection;
+
+                command.CommandText = "INSERT INTO Usuarios(Nome, Email, Sexo, RG, CPF, NomeMae, SituacaoCadastro, DataCadastro) VALUES (@Nome, @Email, @Sexo, @RG, @CPF, @NomeMae, @SituacaoCadastro, @DataCadastro);SELECT CAST(scope_identity() AS int)";
+                
 
                 command.Parameters.AddWithValue("@Nome", usuario.Nome);
                 command.Parameters.AddWithValue("@Email", usuario.Email);
@@ -175,7 +180,7 @@ namespace eCommerce.API.Repositories
                 command.Parameters.AddWithValue("@SituacaoCadastro", usuario.SituacaoCadastro);
                 command.Parameters.AddWithValue("@DataCadastro", usuario.DataCadastro);
 
-                _connection.Open();
+                
                 usuario.Id = (int)command.ExecuteScalar();
 
                 command.CommandText = "INSERT INTO Contatos (UsuarioId, Telefone, Celular) VALUES (@UsuarioId, @Telefone, @Celular); SELECT CAST(scope_identity() AS int)";
@@ -190,6 +195,7 @@ namespace eCommerce.API.Repositories
                 {
                     command = new SqlCommand();
                     command.Connection = (SqlConnection)_connection;
+                    command.Transaction = transaction;
 
                     command.CommandText = "INSERT INTO EnderecosEntrega (UsuarioId, NomeEndereco, CEP, Estado, Cidade, Bairro, Endereco, Numero, Complemento) VALUES (@UsuarioId, @NomeEndereco, @CEP, @Estado, @Cidade, @Bairro, @Endereco, @Numero, @Complemento); SELECT CAST(scope_identity() AS int)";
                     command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
@@ -210,6 +216,7 @@ namespace eCommerce.API.Repositories
                 {
                     command = new SqlCommand();
                     command.Connection = (SqlConnection)_connection;
+                    command.Transaction = transaction;
 
                     command.CommandText = "INSERT INTO UsuariosDepartamentos (UsuarioId, DepartamentoId) VALUES (@UsuarioId, @DepartamentoId);";
                     command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
@@ -217,6 +224,19 @@ namespace eCommerce.API.Repositories
 
                     command.ExecuteNonQuery();
                 }
+
+                transaction.Commit();
+            }catch(Exception ex)
+            {
+                try {
+                    transaction.Rollback();
+                }
+                catch (Exception)
+                {
+                    //Adicionar no log que o Rollback falhou.
+                }
+
+                throw new Exception("Erro ao tentar inserir os dados!");
             }
             finally
             {
