@@ -250,6 +250,7 @@ namespace eCommerce.API.Repositories
             SqlTransaction transaction = (SqlTransaction)_connection.BeginTransaction();
             try
             {
+                #region Usuario
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "UPDATE Usuarios SET Nome = @Nome, Email = @Email, Sexo = @Sexo, RG = @RG, CPF = @CPF, NomeMae = @NomeMae, SituacaoCadastro = @SituacaoCadastro, DataCadastro=@DataCadastro WHERE Id = @Id";
                 command.Connection = (SqlConnection)_connection;
@@ -267,7 +268,8 @@ namespace eCommerce.API.Repositories
                 command.Parameters.AddWithValue("@Id", usuario.Id);
 
                 command.ExecuteNonQuery();
-
+                #endregion
+                #region Contato
                 command = new SqlCommand();
                 command.Connection = (SqlConnection)_connection;
                 command.Transaction = transaction;
@@ -281,7 +283,38 @@ namespace eCommerce.API.Repositories
                 command.Parameters.AddWithValue("@Id", usuario.Contato.Id);
 
                 command.ExecuteNonQuery();
+                #endregion
+                #region Endereço de Entrega
+                command = new SqlCommand();
+                command.Connection = (SqlConnection)_connection;
+                command.Transaction = transaction;
+                command.CommandText = "DELETE FROM EnderecosEntrega WHERE UsuarioId = @UsuarioId";
+                command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
 
+                command.ExecuteNonQuery();
+
+                foreach (var endereco in usuario.EnderecosEntrega)
+                {
+                    command = new SqlCommand();
+                    command.Connection = (SqlConnection)_connection;
+                    command.Transaction = transaction;
+
+                    command.CommandText = "INSERT INTO EnderecosEntrega (UsuarioId, NomeEndereco, CEP, Estado, Cidade, Bairro, Endereco, Numero, Complemento) VALUES (@UsuarioId, @NomeEndereco, @CEP, @Estado, @Cidade, @Bairro, @Endereco, @Numero, @Complemento); SELECT CAST(scope_identity() AS int)";
+                    command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
+                    command.Parameters.AddWithValue("@NomeEndereco", endereco.NomeEndereco);
+                    command.Parameters.AddWithValue("@CEP", endereco.CEP);
+                    command.Parameters.AddWithValue("@Estado", endereco.Estado);
+                    command.Parameters.AddWithValue("@Cidade", endereco.Cidade);
+                    command.Parameters.AddWithValue("@Bairro", endereco.Bairro);
+                    command.Parameters.AddWithValue("@Endereco", endereco.Endereco);
+                    command.Parameters.AddWithValue("@Numero", endereco.Numero);
+                    command.Parameters.AddWithValue("@Complemento", endereco.Complemento);
+
+                    endereco.Id = (int)command.ExecuteScalar();
+                    endereco.UsuarioId = usuario.Id;
+                }
+
+                #endregion
                 transaction.Commit();
             }catch(Exception e)
             {
