@@ -205,6 +205,18 @@ namespace eCommerce.API.Repositories
                     endereco.Id = (int)command.ExecuteScalar();
                     endereco.UsuarioId = usuario.Id;
                 }
+
+                foreach(var departamento in usuario.Departamentos)
+                {
+                    command = new SqlCommand();
+                    command.Connection = (SqlConnection)_connection;
+
+                    command.CommandText = "INSERT INTO UsuariosDepartamentos (UsuarioId, DepartamentoId) VALUES (@UsuarioId, @DepartamentoId);";
+                    command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
+                    command.Parameters.AddWithValue("@DepartamentoId", departamento.Id);
+
+                    command.ExecuteNonQuery();
+                }
             }
             finally
             {
