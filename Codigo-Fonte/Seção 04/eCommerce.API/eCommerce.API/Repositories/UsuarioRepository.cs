@@ -315,6 +315,27 @@ namespace eCommerce.API.Repositories
                 }
 
                 #endregion
+                #region Departamentos
+                command = new SqlCommand();
+                command.Connection = (SqlConnection)_connection;
+                command.Transaction = transaction;
+                command.CommandText = "DELETE FROM UsuariosDepartamentos WHERE UsuarioId = @UsuarioId";
+                command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
+                command.ExecuteNonQuery();
+
+                foreach (var departamento in usuario.Departamentos)
+                {
+                    command = new SqlCommand();
+                    command.Connection = (SqlConnection)_connection;
+                    command.Transaction = transaction;
+
+                    command.CommandText = "INSERT INTO UsuariosDepartamentos (UsuarioId, DepartamentoId) VALUES (@UsuarioId, @DepartamentoId);";
+                    command.Parameters.AddWithValue("@UsuarioId", usuario.Id);
+                    command.Parameters.AddWithValue("@DepartamentoId", departamento.Id);
+
+                    command.ExecuteNonQuery();
+                }
+                #endregion
                 transaction.Commit();
             }catch(Exception e)
             {
