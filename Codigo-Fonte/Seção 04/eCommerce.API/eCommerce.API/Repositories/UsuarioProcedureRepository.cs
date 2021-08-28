@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace eCommerce.API.Repositories
 {
-    public class UsuariosProcedureRepository : IUsuarioRepository
+    public class UsuarioProcedureRepository : IUsuarioRepository
     {
         private IDbConnection _connection;
-        public UsuariosProcedureRepository()
+        public UsuarioProcedureRepository()
         {
             _connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eCommerce;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
