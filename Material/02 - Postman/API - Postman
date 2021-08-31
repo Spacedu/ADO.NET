@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "69c82039-e374-42c6-a723-2ea5cc61f1f5",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuarios - Seção 05",
+			"item": [
+				{
+					"name": "Pegar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"João Rodrigues Fernandes de Oliveira\",\r\n    \"email\": \"joão.oliveira@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"3.553.352\",\r\n    \"cpf\": \"878.660.290-82\",\r\n    \"nomeMae\": \"Josefa Rodrigues de Oliveira\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1003,\r\n    \"nome\": \"Joãozinho Rodrigues Fernandes de Oliveira\",\r\n    \"email\": \"joãozinho.oliveira@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"3.553.352\",\r\n    \"cpf\": \"878.660.290-82\",\r\n    \"nomeMae\": \"Josefa Rodrigues de Oliveira\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios/1003",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios",
+								"1003"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios - Seção 06",
+			"item": [
+				{
+					"name": "Pegar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios/2006",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios",
+								"2006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"João Araujo da Silva\",\r\n    \"email\": \"joão.araujo@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"6.454.462\",\r\n    \"cpf\": \"646.781.080-38\",\r\n    \"nomeMae\": \"Maria Araujo da Silva\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\",\r\n    \"contato\": {\r\n        \"telefone\": \"(38) 63810-6739\",\r\n        \"celular\": \"(38) 68560-2494\"\r\n    },\r\n    \"enderecosEntrega\": [\r\n        {\r\n            \"nomeEndereco\": \"Filipe - Casa\",\r\n            \"cep\": \"63425-560 \",\r\n            \"estado\": \"PE\",\r\n            \"cidade\": \"Paulista\",\r\n            \"bairro\": \"XNossa Senhora da Conceição\",\r\n            \"endereco\": \"XRua Belo Vale\",\r\n            \"numero\": \"1\",\r\n            \"complemento\": \"Apt 103\",\r\n            \"usuario\": null\r\n        }\r\n    ],\r\n    \"departamentos\": [\r\n        {\r\n            \"id\": 2            \r\n        },\r\n        {\r\n            \"id\": 3            \r\n        },\r\n        {\r\n            \"id\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2006,\r\n    \"nome\": \"Fernanda Araujo da Silva\",\r\n    \"email\": \"fernanda.araujo@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"7.454.462\",\r\n    \"cpf\": \"746.781.080-38\",\r\n    \"nomeMae\": \"Maria Araujo da Silva\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\",\r\n    \"contato\": {\r\n        \"id\": 1006,\r\n        \"usuarioId\": 2006,\r\n        \"telefone\": \"(48) 63810-6739\",\r\n        \"celular\": \"(48) 68560-2494\",\r\n        \"usuario\": null\r\n    },\r\n    \"enderecosEntrega\": [\r\n        {\r\n            \"id\": 1003,\r\n            \"usuarioId\": 2006,\r\n            \"nomeEndereco\": \"Casa da Fernanda\",\r\n            \"cep\": \"63425-560 \",\r\n            \"estado\": \"PE\",\r\n            \"cidade\": \"Paulista\",\r\n            \"bairro\": \"FNossa Senhora da Conceição\",\r\n            \"endereco\": \"FRua Belo Vale\",\r\n            \"numero\": \"1\",\r\n            \"complemento\": \"Apt 103\",\r\n            \"usuario\": null\r\n        }\r\n    ],\r\n        \"departamentos\": [\r\n        {\r\n            \"id\": 6\r\n        },\r\n        {\r\n            \"id\": 7\r\n        },\r\n        {\r\n            \"id\": 8\r\n        }\r\n    ]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Usuarios/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Usuarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios - Seção 07",
+			"item": [
+				{
+					"name": "Pegar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/UsuariosProcedure",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"UsuariosProcedure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/UsuariosProcedure/3006",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"UsuariosProcedure",
+								"3006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Marcelo Araujo da Silva\",\r\n    \"email\": \"marcelo.araujo@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"6.454.462\",\r\n    \"cpf\": \"646.781.080-38\",\r\n    \"nomeMae\": \"Maria Araujo da Silva\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/UsuariosProcedure",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"UsuariosProcedure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3006,\r\n    \"nome\": \"Marcelo 2 Araujo da Silva\",\r\n    \"email\": \"marcelo2.araujo@gmail.com\",\r\n    \"sexo\": \"M\",\r\n    \"rg\": \"7.454.462\",\r\n    \"cpf\": \"746.781.080-38\",\r\n    \"nomeMae\": \"Maria Araujo da Silva\",\r\n    \"situacaoCadastro\": \"A\",\r\n    \"dataCadastro\": \"2021-01-01T00:00:00+00:00\"\r\n    \r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/UsuariosProcedure",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"UsuariosProcedure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/UsuariosProcedure/3006",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"UsuariosProcedure",
+								"3006"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
