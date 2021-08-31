@@ -87,7 +87,7 @@ CREATE PROCEDURE dbo.CadastrarUsuario
 )
 AS
 	INSERT INTO [dbo].[Usuarios] (Nome, Email, Sexo, RG, CPF, NomeMae, SituacaoCadastro, DataCadastro) VALUES
-	(@nome, @email, @sexo, @rg, @cpf, @nomeMae, @situacaoCadastro, @dataCadastro)
+	(@nome, @email, @sexo, @rg, @cpf, @nomeMae, @situacaoCadastro, @dataCadastro); SELECT CAST(scope_identity() AS int)
 go
 
 
