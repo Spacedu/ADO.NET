@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[Usuarios] (
 	[CPF] CHAR(14) NULL,
 	[NomeMae] VARCHAR(70) NULL,
 	[SituacaoCadastro] CHAR(1) NOT NULL,
-	[DataCadastro] DATETIME NOT NULL,
+	[DataCadastro] DATETIMEOFFSET NOT NULL,
 
 	CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
@@ -57,7 +57,7 @@ CREATE TABLE [dbo].[UsuariosDepartamentos] (
 	CONSTRAINT [FK_UsuariosDepartamentos_Usuarios] FOREIGN KEY ([UsuarioId]) REFERENCES [dbo].[Usuarios] ([Id]) ON DELETE CASCADE,
 	CONSTRAINT [FK_UsuariosDepartamentos_Departamentos] FOREIGN KEY ([DepartamentoId]) REFERENCES [dbo].[Departamentos] ([Id]) ON DELETE CASCADE
 );
-
+go
 
 
 -- Store Procedures na tabela de Usuarios
@@ -83,11 +83,11 @@ CREATE PROCEDURE dbo.CadastrarUsuario
 	@cpf char(14),
 	@nomeMae varchar(70),
 	@situacaoCadastro char(1),
-	@dataCadastro datetime
+	@dataCadastro datetimeoffset
 )
 AS
 	INSERT INTO [dbo].[Usuarios] (Nome, Email, Sexo, RG, CPF, NomeMae, SituacaoCadastro, DataCadastro) VALUES
-	(@nome, @email, @sexo, @rg, @cpf, @nomeMae, @situacaoCadastro, @dataCadastro)
+	(@nome, @email, @sexo, @rg, @cpf, @nomeMae, @situacaoCadastro, @dataCadastro); SELECT CAST(scope_identity() AS int)
 go
 
 
@@ -102,7 +102,7 @@ CREATE PROCEDURE dbo.AtualizarUsuario
 	@cpf char(14),
 	@nomeMae varchar(70),
 	@situacaoCadastro char(1),
-	@dataCadastro datetime
+	@dataCadastro datetimeoffset
 )
 AS
 	UPDATE [dbo].[Usuarios] SET 
