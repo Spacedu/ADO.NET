@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <img src="https://img-c.udemycdn.com/course/750x422/4273812_a80d.jpg" alt="ADO.NET Logo" width="350">
+  <img src="Material/00 - Logo/Logo.png" alt="ADO.NET Logo" width="350">
   <br>
   Spacedu - ADO.NET
   <br>
@@ -54,7 +54,7 @@ Este curso foi desenvolvido por <b>[Elias Ribeiro](https://github.com/eliasribei
 * ****
 ## Relacionado
 
-[Bootstrap 5](https://getbootstrap.com/) - A biblioteca mais popular de HTML, CSS e JS.
+[ADO.NET](https://docs.microsoft.com/pt-br/dotnet/framework/data/adonet/) - A biblioteca base para estabelecer conexão entre .NET e o Banco de dados(SQL).
 * ****
 ## Suporte
 
